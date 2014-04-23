@@ -122,6 +122,14 @@ connect.createServer(
         skipExpire
       );
     });
+    app.get('/eval/:id', function(request, response, next) {
+      var skipExpire = !!config.documents[request.params.id];
+      return documentHandler.handleEval(
+        request.params.id,
+        response,
+        skipExpire
+      );
+    });
   }),
   // Otherwise, static
   connect.staticCache(),
